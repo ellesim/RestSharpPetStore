@@ -16,4 +16,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      dotnet test --settings Ellesim.RestApi.Tests/prod.runsettings --no-build
+      run: dotnet test --settings Ellesim.RestApi.Tests/prod.runsettings --no-build

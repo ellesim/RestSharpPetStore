@@ -1,4 +1,5 @@
 ﻿using Ellesim.RestApi.Framework.Models.Pet;
+using Ellesim.RestApi.Framework.Utils;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Newtonsoft.Json;
@@ -45,7 +46,7 @@ namespace Ellesim.RestApi.Tests.Tests.Pet
             // -H 'accept: application/json'
             // -H 'Content-Type: application/json'
             // -body
-            RestResponse response = PetApiRequests!.ExecuteApiPostPetRequest(petBody);
+            RestResponse response = PetApi!.PetSection().ExecuteApiPostPetRequest(petBody);
 
 
 
@@ -53,8 +54,10 @@ namespace Ellesim.RestApi.Tests.Tests.Pet
             // ---Verify status code is 200
             // ---Verify response body is equal to expected
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            var responseBody = JsonConvert.DeserializeObject<PetApiModelV2>(response.Content!);
-            responseBody.Should().NotBeNull();
+
+            PetApiModelV2 responseBody = response.ConvertToModel<PetApiModelV2>();
+            //var responseBody = JsonConvert.DeserializeObject<PetApiModelV2>(response.Content!);
+            //responseBody.Should().NotBeNull();
 
             using (new AssertionScope())
             {
@@ -95,7 +98,7 @@ namespace Ellesim.RestApi.Tests.Tests.Pet
             // -H 'accept: application/json'
             // -H 'Content-Type: application/json'
             // -body
-            RestResponse response = PetApiRequests!.ExecuteApiPostPetRequest(petBody);
+            RestResponse response = PetApi!.PetSection().ExecuteApiPostPetRequest(petBody);
 
 
             // Assert

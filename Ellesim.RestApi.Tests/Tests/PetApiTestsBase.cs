@@ -1,25 +1,20 @@
-﻿using Ellesim.RestApi.Framework.Requests.Pet;
-using FluentAssertions;
+﻿using Ellesim.RestApi.Framework.Requests;
+using Ellesim.RestApi.Framework.Requests.Pet;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ellesim.RestApi.Tests.Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public abstract class PetApiTestsBase
     {
-        protected PetApiRequests? PetApiRequests;
+        protected PetStoreApiFacade PetApi;
         protected string? BaseUrl;
 
         [OneTimeSetUp]
         public void BeforeFixture()
         {
             BaseUrl = GlobalSetup.BaseUrl;
-            PetApiRequests = new PetApiRequests(BaseUrl!);
-        }
+            PetApi = new PetStoreApiFacade(BaseUrl!);        }
     }
 }
